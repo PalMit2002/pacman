@@ -689,9 +689,18 @@ Pacman.Map = function (size) {
 
             if (layout === Pacman.BISCUIT || layout === Pacman.POISON) {
                 ctx.fillStyle = layout === Pacman.BISCUIT ? "#FFF" : "#FF0000";
-                ctx.fillRect((x * blockSize) + (blockSize / 2.5),
-                    (y * blockSize) + (blockSize / 2.5),
-                    blockSize / 6, blockSize / 6);
+                // ctx.fillRect((x * blockSize) + (blockSize / 2.5),
+                //     (y * blockSize) + (blockSize / 2.5),
+                //     blockSize / 6, blockSize / 6);
+
+                ctx.fillText(layout === Pacman.BISCUIT ? "1" : "2",
+                    (x * blockSize)
+                    + (blockSize / 2)
+                    ,
+                    (y * blockSize)
+                    + (blockSize / 2)
+                    + (Pacman.FONTSIZE / 2)
+                );
 
             }
         }
@@ -1154,6 +1163,8 @@ Pacman.POISON = 5;
 
 Pacman.FOOD_RATIO = 0.1;
 Pacman.POISON_RATIO = 0.2;
+
+Pacman.FONTSIZE = 14;
 
 Pacman.MAP = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
