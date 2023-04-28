@@ -21,6 +21,9 @@ var NONE = 4,
     DYING = 10,
     Pacman = {};
 
+var GoodNumbers = [1, 2, 3, 4, 5],
+    BadNumbers = [6, 7];
+
 Pacman.FPS = 30;
 
 Pacman.Ghost = function (game, map, colour) {
@@ -533,13 +536,17 @@ Pacman.User = function (game, map) {
 };
 
 Pacman.Map = function (size) {
-
     var height = null,
         width = null,
         blockSize = size,
         pillSize = 0,
         map = null,
-        eatables = 0;
+        eatables = 0,
+        numbers = null;
+
+    function randEle(list) {
+        return list[Math.floor(Math.random() * list.length)]
+    }
 
     function withinBounds(y, x) {
         return y >= 0 && y < height && x >= 0 && x < width;
@@ -596,8 +603,11 @@ Pacman.Map = function (size) {
         eatables = 0;
         height = map.length;
         width = map[0].length;
+        numbers = [];
         for (i = 0; i < height; i += 1) {
+            numrow = [];
             for (j = 0; j < width; j += 1) {
+                let pushed = false;
                 if (map[i][j] === Pacman.BISCUIT) {
                     rand = Math.random();
                     map[i][j] = rand < Pacman.FOOD_RATIO ? Pacman.BISCUIT : Pacman.EMPTY;
@@ -606,11 +616,23 @@ Pacman.Map = function (size) {
                     rand = Math.random();
                     map[i][j] = rand < Pacman.POISON_RATIO ? Pacman.POISON : Pacman.BISCUIT;
                     eatables += rand < Pacman.POISON_RATIO ? 0 : 1;
+                    if (map[i][j] === Pacman.BISCUIT) {
+                        numrow.push(randEle(GoodNumbers));
+                        pushed = true;
+                    }
+                    else if (map[i][j] === Pacman.POISON) {
+                        numrow.push(randEle(BadNumbers));
+                        pushed = true;
+                    }
                 }
                 if (map[i][j] === Pacman.PILL) {
                     map[i][j] = Pacman.EMPTY;
                 }
+                if (!pushed) {
+                    numrow.push(0);
+                }
             }
+            numbers.push(numrow);
         }
     };
 
@@ -671,7 +693,6 @@ Pacman.Map = function (size) {
     };
 
     function drawBlock(y, x, ctx) {
-
         var layout = map[y][x];
 
         if (layout === Pacman.PILL) {
@@ -688,12 +709,13 @@ Pacman.Map = function (size) {
                 blockSize, blockSize);
 
             if (layout === Pacman.BISCUIT || layout === Pacman.POISON) {
-                ctx.fillStyle = layout === Pacman.BISCUIT ? "#FFF" : "#FF0000";
+                // ctx.fillStyle = layout === Pacman.BISCUIT ? "#FFF" : "#FF0000";
+                ctx.fillStyle = "#FFF";
                 // ctx.fillRect((x * blockSize) + (blockSize / 2.5),
                 //     (y * blockSize) + (blockSize / 2.5),
                 //     blockSize / 6, blockSize / 6);
 
-                ctx.fillText(layout === Pacman.BISCUIT ? "1" : "2",
+                ctx.fillText(numbers[y][x],
                     (x * blockSize)
                     + (blockSize / 2)
                     ,
