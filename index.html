@@ -15,7 +15,12 @@
     #pacman {
       height: 450px;
       width: 342px;
-      margin: 20px auto;
+      margin: 20px 5px;
+      margin-right: auto;
+    }
+
+    #contents {
+      margin-left: auto;
     }
 
     #shim {
@@ -24,13 +29,16 @@
       visibility: hidden
     }
 
+    .wrapper {
+      display: flex;
+    }
+
     h1 {
       font-family: BDCartoonShoutRegular;
       text-align: center;
     }
 
     body {
-      width: 342px;
       margin: 0px auto;
       font-family: sans-serif;
     }
@@ -48,20 +56,26 @@
 
   <h1>HTML5 Pacman</h1>
 
-  <a href="http://arandomurl.com/">Writeup</a> |
-  Code on <a href="http://arandomurl.com/">Github</a>
+  <div class="wrapper">
+    <ol id="contents">
+      <li>Deposits</li>
+      <li>Life Insurance</li>
+      <li>Loans </li>
+      <li>Term life insurance</li>
+      <li>Casualty Insurance </li>
+      <li>Money market activities </li>
+      <li>Inhouse management </li>
+      <li>Trade Finance </li>
+      <li>Credit Cards </li>
+      <li>Private Equity funds </li>
+      <li>Money transfer </li>
+      <li>Mutual Funds </li>
+      <li>Custodial Services </li>
+      <li>Investment banking services </li>
+    </ol>
 
-  <ol>
-    <li>Safe</li>
-    <li>Safe</li>
-    <li>Safe</li>
-    <li>Safe</li>
-    <li>Safe</li>
-    <li>Unsafe</li>
-    <li>Unsafe</li>
-  </ol>
-
-  <div id="pacman"></div>
+    <div id="pacman"></div>
+  </div>
   <script src="pacman.js"></script>
   <script src="modernizr-1.5.min.js"></script>
 

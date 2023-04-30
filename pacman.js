@@ -1,12 +1,12 @@
-/*jslint browser: true, undef: true, eqeqeq: true, nomen: true, white: true */
-/*global window: false, document: false */
+var GoodNumbers = [1, 3, 6, 7, 8, 9, 11, 12, 13, 14],
+    BadNumbers = [2, 4, 5, 10];
 
-/*
- * fix looped audio
- * add fruits + levels
- * fix what happens when a ghost is eaten (should go back to base)
- * do proper ghost mechanics (blinky/wimpy etc)
- */
+var Colors = {};
+Colors.background = "#FFFF00";
+Colors.wall = "#0000FF";
+Colors.pickable = "#000";
+Colors.pacman = "#FF00FF";
+Colors.text = "#000";
 
 var NONE = 4,
     UP = 3,
@@ -20,16 +20,6 @@ var NONE = 4,
     EATEN_PAUSE = 9,
     DYING = 10,
     Pacman = {};
-
-var GoodNumbers = [1, 2, 3, 4, 5],
-    BadNumbers = [6, 7];
-
-var Colors = {};
-Colors.background = "#FFFF00";
-Colors.wall = "#0000FF";
-Colors.pickable = "#000";
-Colors.pacman = "#FF00FF";
-Colors.text = "#000";
 
 Pacman.FPS = 30;
 
@@ -722,9 +712,11 @@ Pacman.Map = function (size) {
                 //     (y * blockSize) + (blockSize / 2.5),
                 //     blockSize / 6, blockSize / 6);
 
+                ctx.font = Pacman.FONTSIZE + "px BDCartoonShoutRegular";
                 ctx.fillText(numbers[y][x],
                     (x * blockSize)
                     + (blockSize / 2)
+                    - Pacman.FONTSIZE / 2
                     ,
                     (y * blockSize)
                     + (blockSize / 2)
@@ -1193,7 +1185,7 @@ Pacman.POISON = 5;
 Pacman.FOOD_RATIO = 0.1;
 Pacman.POISON_RATIO = 0.2;
 
-Pacman.FONTSIZE = 14;
+Pacman.FONTSIZE = 10;
 
 Pacman.MAP = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
