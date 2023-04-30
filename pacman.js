@@ -33,7 +33,7 @@ Pacman.Ghost = function (game, map, colour) {
 
     function getNewCoord(dir, current) {
 
-        var speed = isVunerable() ? 1 : isHidden() ? 4 : 2,
+        var speed = isVunerable() ? 1 : isHidden() ? 4 : 1.5,
             xSpeed = (dir === LEFT && -speed || dir === RIGHT && speed || 0),
             ySpeed = (dir === DOWN && speed || dir === UP && -speed || 0);
 
@@ -833,7 +833,7 @@ var PACMAN = (function () {
     var state = WAITING,
         audio = null,
         ghosts = [],
-        ghostSpecs = ["#00FFDE", "#FF0000", "#FFB8DE", "#FFB847"],
+        ghostSpecs = ["#00FFDE", "#FF0000", "#FFB8DE"],
         eatenCount = 0,
         level = 0,
         tick = 0,
@@ -959,8 +959,8 @@ var PACMAN = (function () {
 
         ctx.fillStyle = Colors.text;
         ctx.font = "14px BDCartoonShoutRegular";
-        ctx.fillText("Score: " + user.theScore(), 30, textBase);
-        ctx.fillText("Level: " + level, 260, textBase);
+        ctx.fillText("Score: " + (user.theScore() + (level === 0 ? 0 : level - 1) * 100), 30, textBase);
+        // ctx.fillText("Level: " + level, 260, textBase);
     }
 
     function redrawBlock(pos) {
