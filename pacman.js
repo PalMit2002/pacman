@@ -24,6 +24,13 @@ var NONE = 4,
 var GoodNumbers = [1, 2, 3, 4, 5],
     BadNumbers = [6, 7];
 
+var Colors = {};
+Colors.background = "#FFFF00";
+Colors.wall = "#0000FF";
+Colors.pickable = "#000";
+Colors.pacman = "#FF00FF";
+Colors.text = "#000";
+
 Pacman.FPS = 30;
 
 Pacman.Ghost = function (game, map, colour) {
@@ -485,7 +492,7 @@ Pacman.User = function (game, map) {
             return;
         }
 
-        ctx.fillStyle = "#FFFF00";
+        ctx.fillStyle = Colors.pacman;
         ctx.beginPath();
         ctx.moveTo(((position.x / 10) * size) + half,
             ((position.y / 10) * size) + half);
@@ -502,7 +509,7 @@ Pacman.User = function (game, map) {
         var s = map.blockSize,
             angle = calcAngle(direction, position);
 
-        ctx.fillStyle = "#FFFF00";
+        ctx.fillStyle = Colors.pacman;
 
         ctx.beginPath();
 
@@ -571,7 +578,7 @@ Pacman.Map = function (size) {
 
         var i, j, p, line;
 
-        ctx.strokeStyle = "#0000FF";
+        ctx.strokeStyle = Colors.wall;
         ctx.lineWidth = 5;
         ctx.lineCap = "round";
 
@@ -659,11 +666,11 @@ Pacman.Map = function (size) {
                 if (map[i][j] === Pacman.PILL) {
                     ctx.beginPath();
 
-                    ctx.fillStyle = "#000";
+                    ctx.fillStyle = Colors.background;
                     ctx.fillRect((j * blockSize), (i * blockSize),
                         blockSize, blockSize);
 
-                    ctx.fillStyle = "#FFF";
+                    ctx.fillStyle = Colors.pickable;
                     ctx.arc((j * blockSize) + blockSize / 2,
                         (i * blockSize) + blockSize / 2,
                         Math.abs(5 - (pillSize / 3)),
@@ -680,7 +687,7 @@ Pacman.Map = function (size) {
 
         var i, j, size = blockSize;
 
-        ctx.fillStyle = "#000";
+        ctx.fillStyle = Colors.background;
         ctx.fillRect(0, 0, width * size, height * size);
 
         drawWall(ctx);
@@ -704,13 +711,13 @@ Pacman.Map = function (size) {
         if (layout === Pacman.EMPTY || layout === Pacman.BLOCK ||
             layout === Pacman.BISCUIT || layout === Pacman.POISON) {
 
-            ctx.fillStyle = "#000";
+            ctx.fillStyle = Colors.background;
             ctx.fillRect((x * blockSize), (y * blockSize),
                 blockSize, blockSize);
 
             if (layout === Pacman.BISCUIT || layout === Pacman.POISON) {
                 // ctx.fillStyle = layout === Pacman.BISCUIT ? "#FFF" : "#FF0000";
-                ctx.fillStyle = "#FFF";
+                ctx.fillStyle = Colors.pickable;
                 // ctx.fillRect((x * blockSize) + (blockSize / 2.5),
                 //     (y * blockSize) + (blockSize / 2.5),
                 //     blockSize / 6, blockSize / 6);
@@ -853,7 +860,7 @@ var PACMAN = (function () {
     };
 
     function drawScore(text, position) {
-        ctx.fillStyle = "#FFFFFF";
+        ctx.fillStyle = Colors.text;
         ctx.font = "12px BDCartoonShoutRegular";
         ctx.fillText(text,
             (position["new"]["x"] / 10) * map.blockSize,
@@ -861,7 +868,7 @@ var PACMAN = (function () {
     }
 
     function dialog(text) {
-        ctx.fillStyle = "#FFFF00";
+        ctx.fillStyle = Colors.text;
         ctx.font = "14px BDCartoonShoutRegular";
         var width = ctx.measureText(text).width,
             x = ((map.width * map.blockSize) - width) / 2;
@@ -936,13 +943,13 @@ var PACMAN = (function () {
         var topLeft = (map.height * map.blockSize),
             textBase = topLeft + 17;
 
-        ctx.fillStyle = "#000000";
+        ctx.fillStyle = Colors.background;
         ctx.fillRect(0, topLeft, (map.width * map.blockSize), 30);
 
-        ctx.fillStyle = "#FFFF00";
+        ctx.fillStyle = Colors.text;
 
         for (var i = 0, len = user.getLives(); i < len; i++) {
-            ctx.fillStyle = "#FFFF00";
+            ctx.fillStyle = Colors.text;
             ctx.beginPath();
             ctx.moveTo(150 + (25 * i) + map.blockSize / 2,
                 (topLeft + 1) + map.blockSize / 2);
@@ -958,7 +965,7 @@ var PACMAN = (function () {
         //ctx.fillText("♪", 10, textBase);
         ctx.fillText("s", 10, textBase);
 
-        ctx.fillStyle = "#FFFF00";
+        ctx.fillStyle = Colors.text;
         ctx.font = "14px BDCartoonShoutRegular";
         ctx.fillText("Score: " + user.theScore(), 30, textBase);
         ctx.fillText("Level: " + level, 260, textBase);
