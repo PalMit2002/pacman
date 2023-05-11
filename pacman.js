@@ -879,6 +879,8 @@ var PACMAN = (function () {
         user = null,
         stored = null;
 
+    var livesSpan, scoreSpan;
+
     function getTick() {
         return tick;
     };
@@ -969,6 +971,11 @@ var PACMAN = (function () {
 
     function drawFooter() {
 
+        var score = (user.theScore() + (level === 0 ? 0 : level - 1) * 100);
+
+        livesSpan.innerHTML = user.getLives();
+        scoreSpan.innerHTML = score;
+
         var topLeft = (map.height * map.blockSize),
             textBase = topLeft + 17;
 
@@ -989,14 +996,14 @@ var PACMAN = (function () {
             ctx.fill();
         }
 
-        ctx.fillStyle = !soundDisabled() ? "#00FF00" : "#FF0000";
-        ctx.font = "bold 16px sans-serif";
-        //ctx.fillText("♪", 10, textBase);
-        ctx.fillText("s", 10, textBase);
+        // ctx.fillStyle = !soundDisabled() ? "#00FF00" : "#FF0000";
+        // ctx.font = "bold 16px sans-serif";
+        // //ctx.fillText("♪", 10, textBase);
+        // ctx.fillText("s", 10, textBase);
 
         ctx.fillStyle = Colors.text;
         ctx.font = "14px BDCartoonShoutRegular";
-        ctx.fillText("Score: " + (user.theScore() + (level === 0 ? 0 : level - 1) * 100), 30, textBase);
+        ctx.fillText("Score: " + score, 30, textBase);
         // ctx.fillText("Level: " + level, 260, textBase);
     }
 
@@ -1128,6 +1135,9 @@ var PACMAN = (function () {
         var i, len, ghost,
             blockSize = wrapper.offsetWidth / 19,
             canvas = document.createElement("canvas");
+
+        livesSpan = document.getElementById("lives")
+        scoreSpan = document.getElementById("score")
 
         canvas.setAttribute("width", (blockSize * 19) + "px");
         canvas.setAttribute("height", (blockSize * 22) + 30 + "px");
