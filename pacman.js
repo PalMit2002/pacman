@@ -876,7 +876,7 @@ var PACMAN = (function () {
         for (var i = 0; i < ghosts.length; i += 1) {
             ghosts[i].reset();
         }
-        audio.play("start");
+        // audio.play("start");
         timerStart = tick;
         setState(COUNTDOWN);
     }
