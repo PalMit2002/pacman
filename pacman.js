@@ -601,24 +601,56 @@ Pacman.Map = function (size) {
         height = map.length;
         width = map[0].length;
         numbers = [];
+
+        countEatables = 0;
+        for (i = 0; i < height; i += 1) {
+            for (j = 0; j < width; j += 1) {
+                if (map[i][j] === Pacman.BISCUIT) {
+                    countEatables += 1;
+                }
+            }
+        }
+
+        arr = []
+        for (i = 1; i <= countEatables; i++) {
+            arr.push(i);
+        }
+
+        arrFood = [];
+        while (arrFood.length < GoodNumbers.length) {
+            var r = Math.floor(Math.random() * arr.length);
+            arrFood.push(arr[r]);
+            arr.splice(r, 1);
+        }
+
+        arrPoison = [];
+        while (arrPoison.length < BadNumbers.length) {
+            var r = Math.floor(Math.random() * arr.length);
+            arrPoison.push(arr[r]);
+            arr.splice(r, 1);
+        }
+
+        eatPlaceCounter = 0;
         for (i = 0; i < height; i += 1) {
             numrow = [];
             for (j = 0; j < width; j += 1) {
                 let pushed = false;
                 if (map[i][j] === Pacman.BISCUIT) {
-                    rand = Math.random();
-                    map[i][j] = rand < Pacman.FOOD_RATIO ? Pacman.BISCUIT : Pacman.EMPTY;
-                }
-                if (map[i][j] === Pacman.BISCUIT) {
-                    rand = Math.random();
-                    map[i][j] = rand < Pacman.POISON_RATIO ? Pacman.POISON : Pacman.BISCUIT;
-                    eatables += rand < Pacman.POISON_RATIO ? 0 : 1;
-                    if (map[i][j] === Pacman.BISCUIT) {
-                        numrow.push(randEle(GoodNumbers));
+                    eatPlaceCounter++;
+                    if (arrFood.includes(eatPlaceCounter)) {
+                        map[i][j] = Pacman.BISCUIT;
+                        numrow.push(GoodNumbers[arrFood.indexOf(eatPlaceCounter)]);
+                        eatables++;
                         pushed = true;
                     }
-                    else if (map[i][j] === Pacman.POISON) {
-                        numrow.push(randEle(BadNumbers));
+                    else if (arrPoison.includes(eatPlaceCounter)) {
+                        map[i][j] = Pacman.POISON;
+                        numrow.push(BadNumbers[arrPoison.indexOf(eatPlaceCounter)]);
+                        pushed = true;
+                    }
+                    else {
+                        map[i][j] = Pacman.EMPTY;
+                        numrow.push(0);
                         pushed = true;
                     }
                 }
