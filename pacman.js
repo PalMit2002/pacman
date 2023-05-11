@@ -892,10 +892,15 @@ var PACMAN = (function () {
     }
 
     function dialog(text) {
-        ctx.fillStyle = Colors.text;
         ctx.font = "14px BDCartoonShoutRegular";
         var width = ctx.measureText(text).width,
             x = ((map.width * map.blockSize) - width) / 2;
+
+
+        ctx.fillStyle = Colors.background;
+        ctx.fillRect(x - 10, 11.5 * map.blockSize, width + 20, 2 * map.blockSize);
+
+        ctx.fillStyle = Colors.text;
         ctx.fillText(text, x, (map.height * 10) + 8);
     }
 
@@ -1058,6 +1063,7 @@ var PACMAN = (function () {
         } else if (state === WAITING && stateChanged) {
             stateChanged = false;
             map.draw(ctx);
+
             dialog("Press Space to start a New game");
         } else if (state === EATEN_PAUSE &&
             (tick - timerStart) > (Pacman.FPS / 3)) {
