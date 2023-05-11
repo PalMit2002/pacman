@@ -2,11 +2,11 @@ var GoodNumbers = [1, 3, 6, 7, 8, 9, 11, 12, 13, 14],
     BadNumbers = [2, 4, 5, 10];
 
 var Colors = {};
-Colors.background = "#FFFF00";
-Colors.wall = "#0000FF";
-Colors.pickable = "#000";
+Colors.background = "#20142C";
+Colors.wall = "#bc94fc";
+Colors.pickable = "#FFF";
 Colors.pacman = "#FF00FF";
-Colors.text = "#000";
+Colors.text = "#FFF";
 
 var NONE = 4,
     UP = 3,

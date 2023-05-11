@@ -21,6 +21,28 @@
 
     #contents {
       margin-left: auto;
+      margin-right: auto;
+      margin-top: auto;
+      margin-bottom: auto;
+      padding: 10px;
+
+      height: fit-content;
+
+      background-image: url("assets/backinstru.png");
+    }
+
+    #options {
+      display: flex;
+    }
+
+    #instru {
+      background-image: url("assets/purplegrad.png");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+
+      padding: 10px;
+
     }
 
     #shim {
@@ -31,6 +53,7 @@
 
     .wrapper {
       display: flex;
+      color: white;
     }
 
     h1 {
@@ -41,11 +64,13 @@
     body {
       margin: 0px auto;
       font-family: sans-serif;
+      height: 100vh;
+
       background-image: url("assets/background.png");
       background-attachment: fixed;
       background-position: top;
-      background-repeat: repeat-y;
-      background-size: contain;
+      background-repeat: repeat-x;
+      background-size: auto 100vh;
     }
 
     a {
@@ -57,22 +82,29 @@
 
 <body>
   <div class="wrapper">
-    <ol id="contents">
-      <li>Deposits</li>
-      <li>Life Insurance</li>
-      <li>Loans </li>
-      <li>Term life insurance</li>
-      <li>Casualty Insurance </li>
-      <li>Money market activities </li>
-      <li>Inhouse management </li>
-      <li>Trade Finance </li>
-      <li>Credit Cards </li>
-      <li>Private Equity funds </li>
-      <li>Money transfer </li>
-      <li>Mutual Funds </li>
-      <li>Custodial Services </li>
-      <li>Investment banking services </li>
-    </ol>
+    <div id="contents">
+      <div id="instru">Eat the dots which belong to banking services</div>
+      <div id="options">
+        <ol id="contents1">
+          <li>Deposits</li>
+          <li>Life Insurance</li>
+          <li>Loans </li>
+          <li>Term life insurance</li>
+          <li>Casualty Insurance </li>
+          <li>Money market activities </li>
+          <li>Inhouse management </li>
+        </ol>
+        <ol id="contents2">
+          <li>Trade Finance </li>
+          <li>Credit Cards </li>
+          <li>Private Equity funds </li>
+          <li>Money transfer </li>
+          <li>Mutual Funds </li>
+          <li>Custodial Services </li>
+          <li>Investment banking services </li>
+        </ol>
+      </div>
+    </div>
 
     <div id="pacman"></div>
   </div>
