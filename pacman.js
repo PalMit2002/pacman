@@ -1,3 +1,5 @@
+var parentVar = "score";
+
 var GoodNumbers = [1, 3, 6, 7, 8, 9, 11, 12, 13, 14],
     BadNumbers = [2, 4, 5, 10];
 
@@ -879,7 +881,8 @@ var PACMAN = (function () {
         user = null,
         stored = null;
 
-    var livesSpan, scoreSpan;
+    // var livesSpan, scoreSpan;
+    var player;
 
     function getTick() {
         return tick;
@@ -977,7 +980,8 @@ var PACMAN = (function () {
         // livesSpan.innerHTML = user.getLives();
         // scoreSpan.innerHTML = score;
 
-        console.log("Entered");
+        if (player)
+            player.SetVar(parentVar, score);
 
         var topLeft = (map.height * map.blockSize),
             textBase = topLeft + 17;
@@ -1139,8 +1143,11 @@ var PACMAN = (function () {
             blockSize = wrapper.offsetWidth / 19,
             canvas = document.createElement("canvas");
 
-        livesSpan = document.getElementById("lives")
-        scoreSpan = document.getElementById("score")
+        // livesSpan = document.getElementById("lives")
+        // scoreSpan = document.getElementById("score")
+
+        if (window.parent && window.parent.GetPlayer)
+            player = window.parent.GetPlayer();
 
         canvas.setAttribute("width", (blockSize * 19) + "px");
         canvas.setAttribute("height", (blockSize * 22) + 30 + "px");
