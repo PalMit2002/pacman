@@ -894,16 +894,17 @@ var PACMAN = (function () {
     }
 
     function dialog(text) {
-        ctx.font = "14px BDCartoonShoutRegular";
+        ctx.font = "12px BDCartoonShoutRegular";
         var width = ctx.measureText(text).width,
             x = ((map.width * map.blockSize) - width) / 2;
 
 
+        // ctx.fillStyle = "#FFF";
         ctx.fillStyle = Colors.background;
-        ctx.fillRect(x - 10, 11.5 * map.blockSize, width + 20, 2 * map.blockSize);
+        ctx.fillRect(x - 10, (map.height * map.blockSize / 2), width + 20, 2 * map.blockSize);
 
         ctx.fillStyle = Colors.text;
-        ctx.fillText(text, x, (map.height * 10) + 8);
+        ctx.fillText(text, x, (map.height * map.blockSize / 2) + 20);
     }
 
     function soundDisabled() {
@@ -973,8 +974,10 @@ var PACMAN = (function () {
 
         var score = (user.theScore() + (level === 0 ? 0 : level - 1) * 100);
 
-        livesSpan.innerHTML = user.getLives();
-        scoreSpan.innerHTML = score;
+        // livesSpan.innerHTML = user.getLives();
+        // scoreSpan.innerHTML = score;
+
+        console.log("Entered");
 
         var topLeft = (map.height * map.blockSize),
             textBase = topLeft + 17;
@@ -988,10 +991,10 @@ var PACMAN = (function () {
             ctx.fillStyle = Colors.text;
             ctx.beginPath();
             ctx.moveTo(150 + (25 * i) + map.blockSize / 2,
-                (topLeft + 1) + map.blockSize / 2);
+                (topLeft + 4) + map.blockSize / 2);
 
             ctx.arc(150 + (25 * i) + map.blockSize / 2,
-                (topLeft + 1) + map.blockSize / 2,
+                (topLeft + 4) + map.blockSize / 2,
                 map.blockSize / 2, Math.PI * 0.25, Math.PI * 1.75, false);
             ctx.fill();
         }
@@ -1002,7 +1005,7 @@ var PACMAN = (function () {
         // ctx.fillText("s", 10, textBase);
 
         ctx.fillStyle = Colors.text;
-        ctx.font = "14px BDCartoonShoutRegular";
+        ctx.font = "12px BDCartoonShoutRegular";
         ctx.fillText("Score: " + score, 30, textBase);
         // ctx.fillText("Level: " + level, 260, textBase);
     }
