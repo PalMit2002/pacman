@@ -1,4 +1,4 @@
-var parentVar = "score";
+var parentVar = "points";
 
 var GoodNumbers = [1, 3, 6, 7, 8, 9, 11, 12, 13, 14],
     BadNumbers = [2, 4, 5, 10];
