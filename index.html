@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <title>HTML5 Pacman</title>
-
+  <!-- https://www.masswerk.at/JavaPac/pacman-howto.html 
+  arial
+  -->
   <style type="text/css">
-    @font-face {
-      font-family: 'BDCartoonShoutRegular';
-      src: url('BD_Cartoon_Shout-webfont.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-    }
-
     #pacman {
       /* height: 300px; */
-      width: 70vh;
-      margin: 20px 5px;
+      width: 60vh;
+      margin-top: 60px;
       margin-right: auto;
     }
 
@@ -24,34 +20,31 @@
       margin-right: auto;
       margin-top: auto;
       margin-bottom: auto;
-      padding: 10px;
-
+      padding: 5px;
       font-size: 16px;
-
       height: fit-content;
-
       background-image: url("assets/backinstru.png");
     }
-
 
     #instru {
       background-image: url("assets/purplegrad.png");
       background-size: 100% 100%;
       background-repeat: no-repeat;
       background-position: center;
-
-      padding: 10px;
+      padding: 7px;
 
     }
 
     #shim {
-      font-family: BDCartoonShoutRegular;
+      font-family: 'Graphik';
       position: absolute;
       visibility: hidden
     }
 
     #options {
       margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
     }
 
     .wrapper {
@@ -60,13 +53,13 @@
     }
 
     h1 {
-      font-family: BDCartoonShoutRegular;
+      font-family: 'Graphik';
       text-align: center;
     }
 
     body {
       margin: 0px auto;
-      font-family: sans-serif;
+      font-family: Graphik;
       /* height: 403px;
       width: 919px; */
       /* overflow: hidden; */
@@ -86,7 +79,7 @@
       margin-right: auto;
       margin-top: 10px;
       margin-bottom: 10px;
-      padding: 10px;
+      padding: 15px;
       padding-right: 200px;
       background-image: url("assets/purpletrans.png");
       background-size: 100% 100%;
@@ -106,6 +99,46 @@
       font-size: large;
       font-weight: bold;
     }
+
+    #content div span.icon::before {
+      content: url(assets/listicon.png);
+      margin-right: 10px;
+
+    }
+
+    #content div span.item {
+      /* background-image: url(assets/purpletrans.png); */
+      background-image: linear-gradient(to right, rgb(99, 12, 146) 50%, rgb(0, 0, 0));
+      padding: 3px;
+    }
+
+    #content div {
+      margin-bottom: 12px;
+    }
+
+    .canvas-container {
+      position: relative;
+      width: 500px;
+      height: 500px;
+    }
+
+    /* #pacman {
+      position: absolute;
+
+    } */
+
+    #button {
+      text-align: center;
+    }
+
+    #button button {
+
+      background-color: white;
+      color: rgb(99, 12, 146);
+      padding: 5px;
+      font-size: 1em;
+      font-weight: bold;
+    }
   </style>
 
 </head>
@@ -121,37 +154,53 @@
 
     </div>
   </div> -->
+
   <div class="wrapper">
     <div id="contents">
-      <div id="instru">Eat the dots which belong to banking services</div>
+      <h2 style="color:white; 
+      background-image: linear-gradient(to right, rgb(99, 12, 146),rgb(0, 0,0));padding: 7px;">
+        Let&apos;s have some fun</h2>
+      <div id="instru">Eat the numbers which belong to banking services</div>
+
       <div id="options">
-        <div id="contents1">
-          <div>1. Deposits</div>
-          <div>2. Life Insurance</div>
-          <div>3. Loans </div>
-          <div>4. Term life insurance</div>
-          <div>5. Casualty Insurance </div>
-          <div>6. Money market activities </div>
-          <div>7. Inhouse management </div>
+        <div id="content">
+          <div><span class="icon"></span><span class="item">1. Deposits</span></div>
+          <div><span class="icon"></span><span class="item">2. Life Insurance</span></div>
+          <div><span class="icon"></span><span class="item">3. Loans </span></div>
+          <div><span class="icon"></span><span class="item">4. Term life insurance</span></div>
+          <div><span class="icon"></span><span class="item">5. Casualty Insurance </span></div>
+          <div><span class="icon"></span><span class="item">6. Money market activities </span></div>
+          <div><span class="icon"></span><span class="item">7. Inhouse management </span></div>
         </div>
-        <div id="contents2">
-          <div>8. Trade Finance </div>
-          <div>9. Credit Cards </div>
-          <div>10.Private Equity funds </div>
-          <div>11. Money transfer </div>
-          <div>12. Mutual Funds </div>
-          <div>13. Custodial Services </div>
-          <div>14. Investment banking services </div>
+        <div id="content">
+          <div><span class="icon"></span><span class="item">8. Trade Finance</span> </div>
+          <div><span class="icon"></span><span class="item">9. Credit Cards </span></div>
+          <div><span class="icon"></span><span class="item">10.Private Equity funds </span></div>
+          <div><span class="icon"></span><span class="item">11. Money transfer</span> </div>
+          <div><span class="icon"></span><span class="item">12. Mutual Funds</span> </div>
+          <div><span class="icon"></span><span class="item">13. Custodial Services</span> </div>
+          <div><span class="icon"></span><span class="item">14. Investment banking services</span> </div>
         </div>
       </div>
+      <div id="button">
+        <button onclick="pressStart()" id="start">START</button>
+      </div>
     </div>
-
     <div id="pacman"></div>
+    <!-- <div class="canvas-container">
+      
+     
+    </div> -->
+
+
   </div>
   <script src="pacman.js"></script>
   <script src="modernizr-1.5.min.js"></script>
 
   <script>
+
+    //function startGame(){
+
 
     var el = document.getElementById("pacman");
 
@@ -162,7 +211,9 @@
       el.innerHTML = "Sorry, needs a decent browser<br /><small>" +
         "(firefox 3.6+, Chrome 4+, Opera 10+ and Safari 4+)</small>";
     }
+    //}
   </script>
 
 </body>
+
 </html>
